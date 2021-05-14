@@ -1,7 +1,7 @@
 import React from "react";
-import "./volSurface.css";
 import { Line } from "react-chartjs-2";
-
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 export default class volSurface extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,6 @@ export default class volSurface extends React.Component {
         datasets: [
           {
             lineTension: 0.2,
-            // data: [x, volxdC, voltfdC, ATM, voltfdP, volxdP, y],
             data: [1, 1, 1, 1, 1, 1, 1],
             label: "VOL%",
             borderColor: ["#F7F57C"],
@@ -35,7 +34,7 @@ export default class volSurface extends React.Component {
             {
               ticks: {
                 beginAtZero: false,
-                fontColor: "white",
+                fontColor: "black",
                 fontSize: "16",
               },
               scaleLabel: {
@@ -78,7 +77,6 @@ export default class volSurface extends React.Component {
 
   componentDidMount() {
     this.updateChart();
-    console.log(this.chartReference); // returns a Chart.js instance reference
   }
 
   tfdRR = (event) => {
@@ -104,8 +102,6 @@ export default class volSurface extends React.Component {
     tfdSTR = Number(tfdSTR);
     ATM = Number(ATM);
     xdRR = Number(xdRR);
-    xdSTR = Number(xdSTR);
-    console.log(tfdRR, tfdSTR, ATM);
     var { data } = this.state;
     var volxdC = ATM + 0.5 * xdRR + xdSTR;
     var voltfdC = ATM + 0.5 * tfdRR + tfdSTR;
@@ -125,73 +121,59 @@ export default class volSurface extends React.Component {
         <div className="vol-title">Volatility Smile Calculator</div>
         <div className="vol-subtitle">
           Simple volatility smile calculator using market inputs. Chart
-          generated with the <code>ChartJS</code> module
+          generated with the <code>ChartJS</code> module.
         </div>
         <div className="vol-inputs">
-          <div class="ui labeled input" id="vol-input">
-            <div class="ui label" id="vol-label">
-              At-The-Money Vol%
-            </div>
-            <input
-              type="text"
+          <div className="vol-input">
+            <TextField
+              variant="outlined"
               value={ATM}
               onChange={this.ATM}
-              id="input-text"
+              label="ATM-Volatility"
+              color="secondary"
             />
           </div>
-          <div class="ui labeled input" id="vol-input">
-            <div class="ui label" id="vol-label">
-              25 Delta Risk-Reversal
-            </div>
-            <input
-              type="text"
+          <div className="vol-input">
+            <TextField
+              variant="outlined"
               value={tfdRR}
               onChange={this.tfdRR}
-              id="input-text"
+              label="ATM-Volatility"
+              color="secondary"
             />
           </div>
-          <div class="ui labeled input" id="vol-input">
-            <div class="ui label" id="vol-label">
-              Ten Delta Risk-Reversal
-            </div>
-            <input
-              type="text"
+          <div className="vol-input">
+            <TextField
+              variant="outlined"
               value={xdRR}
               onChange={this.xdRR}
-              id="input-text"
+              label="ATM-Volatility"
+              color="secondary"
             />
           </div>
-          <div class="ui labeled input" id="vol-input">
-            <div class="ui label" id="vol-label">
-              25 Delta Strangle
-            </div>
-            <input
-              type="text"
+          <div className="vol-input">
+            <TextField
+              variant="outlined"
               value={tfdSTR}
               onChange={this.tfdSTR}
-              id="input-text"
+              label="ATM-Volatility"
+              color="secondary"
             />
           </div>
-          <div class="ui labeled input" id="vol-input">
-            <div class="ui label" id="vol-label">
-              10 Delta Strangle
-            </div>
-            <input
-              type="text"
+          <div className="vol-input">
+            <TextField
+              variant="outlined"
               value={xdSTR}
               onChange={this.xdSTR}
-              id="input-text"
+              label="ATM-Volatility"
+              color="secondary"
             />
           </div>
         </div>
         <div className="vol-button-wrapper">
-          <div
-            className="ui button"
-            id="vol-button"
-            onClick={() => this.updateChart()}
-          >
+          <Button onClick={() => this.updateChart()} variant="outlined">
             Render Chart
-          </div>
+          </Button>
         </div>
 
         <Line ref={this.chartReference} data={data} options={options} />
