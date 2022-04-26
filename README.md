@@ -1,6 +1,6 @@
-Construct an implied volatility surface from market inputs. This was my first JavaScript project that I've since updated to use React and clean-up the look somewhat.
+Construct an implied volatility surface from market inputs. This was my first JavaScript project that I've since updated to use React.
 
-These formulas are not my area of expertise, but it's a simple application of the ChartJS module
+Put in some numbers and it gives a nice ChartJS visual
 
 Deployed here: https://volatility-surface.herokuapp.com/
 
